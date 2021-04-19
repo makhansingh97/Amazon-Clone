@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import "./App.css";
 import Header from "./Header";
 import Home from "./Home";
@@ -13,21 +14,24 @@ function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
-      console.log("The user is >>> ", authUser);
-
       if (authUser) {
+        //the user is logged In / was logged In
+        console.log("THE USER IS >>> ", authUser.email);
         dispatch({
           type: "SET_USER",
           user: authUser,
         });
       } else {
+        // the user is logged out
+        console.log("THE USER IS >>> ", authUser);
         dispatch({
           type: "SET_USER",
           user: null,
         });
       }
     });
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Router>

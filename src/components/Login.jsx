@@ -10,27 +10,26 @@ function Login() {
 
   const signIn = (e) => {
     e.preventDefault();
+
     auth
       .signInWithEmailAndPassword(email, password)
-      .then((auth) => {
+      .then((userCredentials) => {
         history.push("/");
       })
-      .catch((error) => {
-        alert(error.message);
-      });
+      .catch((error) => alert(error.message));
   };
 
   const register = (e) => {
     e.preventDefault();
     auth
       .createUserWithEmailAndPassword(email, password)
-      .then((auth) => {
-        if (auth) {
+      .then((userCredentials) => {
+        if (userCredentials) {
           history.push("/");
         }
       })
       .catch((error) => {
-        console.log(error.message);
+        alert(error.message);
       });
   };
 
