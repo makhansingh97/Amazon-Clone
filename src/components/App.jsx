@@ -10,20 +10,18 @@ import { auth } from "../firebase";
 import { useStateValue } from "./StateProvider";
 
 function App() {
+  // eslint-disable-next-line no-empty-pattern
   const [{}, dispatch] = useStateValue();
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
+      console.log("THE USER IS >>> ", authUser);
       if (authUser) {
-        //the user is logged In / was logged In
-        console.log("THE USER IS >>> ", authUser.email);
         dispatch({
           type: "SET_USER",
           user: authUser,
         });
       } else {
-        // the user is logged out
-        console.log("THE USER IS >>> ", authUser);
         dispatch({
           type: "SET_USER",
           user: null,
