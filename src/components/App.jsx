@@ -9,6 +9,12 @@ import Login from "./Login";
 import { auth } from "../firebase";
 import { useStateValue } from "./StateProvider";
 import Payment from "./Payment";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const promise = loadStripe(
+  "pk_test_51Ij7JSSCmRRWWMftPVQZ3Wt1NS2s9D8vitjGJGXMXB6tfcqut1N5kgE30z20tWfyA24TJPH3mhLwJh5y1yFlqGmP001wliBZmS"
+);
 
 function App() {
   // eslint-disable-next-line no-empty-pattern
@@ -44,7 +50,9 @@ function App() {
           </Route>
           <Route path="/payment">
             <Header />
-            <Payment />
+            <Elements stripe={promise}>
+              <Payment />
+            </Elements>
           </Route>
           <Route path="/">
             <Header />
